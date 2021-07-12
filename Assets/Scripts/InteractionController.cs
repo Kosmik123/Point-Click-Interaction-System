@@ -30,12 +30,20 @@ public class InteractionController : MonoBehaviour
         ;
     }
 
-    public int ShowContextMenu(Condition condition)
+
+    public void ChangeVariable(VariableSetting settings)
     {
-        return 0;
+        ;
     }
 
 
+
+    public ChoiceContextMenuInstanceState ChooseOption(ContextMenuOptionProperties[] options)
+    {
+        ChoiceContextMenuInstanceState choiceInstance = new ChoiceContextMenuInstanceState();
+
+        return choiceInstance;
+    }
 
 
 

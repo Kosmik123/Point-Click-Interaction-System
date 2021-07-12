@@ -4,11 +4,18 @@
 public class InteractionOption
 {
     public ContextMenuOptionProperties optionProperties;
-    public UnityEvent action;
+    public CustomEvent action;
 
     public void Do()
     {
-        action.Invoke();
+        action.Invoke(1,1);
     }
+
+}
+
+
+[System.Serializable]
+public class CustomEvent : UnityEvent<int, int>
+{
 
 }

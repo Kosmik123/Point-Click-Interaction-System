@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b27818cc4f6f83438d14ba55e7a4e1b, type: 3}
-  m_Name: Condition1
+  m_Script: {fileID: 11500000, guid: ed6e69b07ef50464cacf88664119fbe3, type: 3}
+  m_Name: Set variable 1 as -25
   m_EditorClassIdentifier: 
+  id: 1
+  type: 0
+  value: -25

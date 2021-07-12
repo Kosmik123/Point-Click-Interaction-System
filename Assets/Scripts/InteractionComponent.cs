@@ -9,10 +9,7 @@ public class InteractionComponent : MonoBehaviour
 
     public InteractionOption[] actions;
 
-    private int chosenOption = -1;
-
-
-
+    
     public bool IsConditionFulfilled()
     {
         foreach(var cond in conditions)
@@ -26,28 +23,33 @@ public class InteractionComponent : MonoBehaviour
     public void Perform()
     {
         if (actions.Length < 1)
-        {
-            throw (new System.Exception("Error: Brak akcji"));
-        }
+            throw (new System.Exception("Error: No action assigned!"));
 
 
         if (actions.Length == 1)
+        {
             actions[0].Do();
+        }
         else
         {
-            //UIController.ShowContextMenu(actions);
-            StartCoroutine(WaitForOptionChoiceCo());
+            ContextMenuOptionProperties[] options = GetOptions();
+            ChoiceContextMenuInstanceState choiceInstance = InteractionController.Instance.ChooseOption(options);
+            StartCoroutine(WaitForOptionChoiceCo(choiceInstance)); // Nie podoba mi się to. Trzeba się z tym przespać
         }
-
     }
 
-    IEnumerator WaitForOptionChoiceCo()
+    private IEnumerator WaitForOptionChoiceCo(ChoiceContextMenuInstanceState contextMenuInstance)
     {
-        yield return new WaitUntil(() => chosenOption >= 0);
-        actions[chosenOption].Do();
-        chosenOption = -1;
+        yield return new WaitUntil(() => contextMenuInstance.IsChosen);
+        actions[contextMenuInstance.Option].Do();
     }
 
-
+    private ContextMenuOptionProperties[] GetOptions()
+    {
+        ContextMenuOptionProperties[] options = new ContextMenuOptionProperties[actions.Length];
+        for (int i = 0; i < actions.Length; i++)
+            options[i] = actions[i].optionProperties;
+        return options;
+    }
 
 }
