@@ -496,7 +496,30 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 11400000, guid: da8b90b1117c08d4b8bead80fa8cdf02,
               type: 2}
-            m_ObjectArgumentAssemblyTypeName: VariableSettings, Assembly-CSharp
+            m_ObjectArgumentAssemblyTypeName: VariableSetting, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1256770930}
+          m_MethodName: ChangeVariable
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: f73544726a31b5c4fa59d12b8701cfb7,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: VariableSetting, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1256770929}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
