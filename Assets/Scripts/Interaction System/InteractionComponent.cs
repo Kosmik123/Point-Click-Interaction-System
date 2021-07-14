@@ -33,8 +33,8 @@ public class InteractionComponent : MonoBehaviour
         else
         {
             ContextMenuOptionProperties[] options = GetOptions();
-            ChoiceContextMenuInstanceState choiceInstance = InteractionController.Instance.ChooseOption(options);
-            StartCoroutine(WaitForOptionChoiceCo(choiceInstance)); // Nie podoba mi się to. Trzeba się z tym przespać
+            ChoiceContextMenuInstanceState choiceInstance = ChooseOption(options);
+            StartCoroutine(WaitForOptionChoiceCo(choiceInstance));
         }
     }
 
@@ -51,5 +51,20 @@ public class InteractionComponent : MonoBehaviour
             options[i] = actions[i].optionProperties;
         return options;
     }
+
+
+    public ChoiceContextMenuInstanceState ChooseOption(ContextMenuOptionProperties[] options)
+    {
+        ChoiceContextMenuInstanceState choiceInstance = new ChoiceContextMenuInstanceState();
+
+        return choiceInstance;
+    }
+
+
+
+
+
+
+
 
 }

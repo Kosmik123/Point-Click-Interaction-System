@@ -3,34 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InteractionComponent))]
-public class InteractiveObject : MonoBehaviour
+public abstract class InteractiveObject : MonoBehaviour
 {
-    private InteractionComponent[] components;
-
+    protected InteractionComponent[] components;
 
     private void Awake()
     {
         components = GetComponents<InteractionComponent>();
     }
 
-
-
-    public void Interact()
+    protected void Interact()
     {
-        foreach(var component in components)
+        Debug.Log("Interacted");
+        foreach (var component in components)
         {
-            if(component.IsConditionFulfilled())
+            if (component.IsConditionFulfilled())
             {
                 component.Perform();
                 return;
             }
         }
     }
-
-    private void OnMouseDown()
-    {
-        Interact();
-    }
-
-
 }
