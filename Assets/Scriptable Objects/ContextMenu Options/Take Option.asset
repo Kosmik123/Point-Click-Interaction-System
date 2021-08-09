@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87b2bcf5a92c5d4b9a023fbd27d9383, type: 3}
   m_Name: Take Option
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
+  message: Take
+  icon: {fileID: -299690340437171572, guid: 8a1fafc7f88dd084b980aa90301f8bf8, type: 3}

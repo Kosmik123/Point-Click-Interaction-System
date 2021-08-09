@@ -19,8 +19,15 @@ public class UIController : MonoBehaviour
         else
             instance = this;
     }
-
-
+        
+    public void CreateContextMenu(ContextMenuOptionProperties[] optionsArray, ChoiceContextMenuInstanceState answer)
+    {
+        // Instantiate (ContextMenuPrefab)
+        foreach(var option in optionsArray)
+        {
+             // Instantiate 1 option button with text = option.message and image = option.icon
+        }
+    }
 
 }
 
@@ -30,19 +37,24 @@ public class UIController : MonoBehaviour
 public class ChoiceContextMenuInstanceState
 {
     public bool IsChosen { get; private set; }
-    public int Option { get; private set; }
+    public int OptionId { get; private set; }
 
     public ChoiceContextMenuInstanceState()
     {
         IsChosen = false;
-        Option = -1;
+        OptionId = -1;
     }
 
     public void Set(int opt)
     {
-        Option = opt;
+        OptionId = opt;
         IsChosen = true;
     }
+
+
+
+
+
 
 }
 

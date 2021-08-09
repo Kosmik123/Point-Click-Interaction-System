@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InteractionComponent : MonoBehaviour
+// system using inventory, variables and flags as conditions
+[RequireComponent(typeof(InteractiveObject))]
+public class InteractionComponent : InteractionComponentBase
 {
     public Condition[] conditions;
-
     public InteractionOption[] actions;
 
-    
-    public bool IsConditionFulfilled()
+    public override bool IsConditionFulfilled()
     {
-        foreach(var cond in conditions)
+        foreach(var condition in conditions)
         {
-            if (!cond.IsFulfilled())
+            if (!condition.IsFulfilled())
                 return false;
         }
         return true;
     }
 
-    public void Perform()
+    public override void Perform()
     {
         if (actions.Length < 1)
             throw (new System.Exception("Error: No action assigned!"));
-
 
         if (actions.Length == 1)
         {
@@ -33,7 +32,7 @@ public class InteractionComponent : MonoBehaviour
         else
         {
             ContextMenuOptionProperties[] options = GetOptions();
-            ChoiceContextMenuInstanceState choiceInstance = ChooseOption(options);
+            ChoiceContextMenuInstanceState choiceInstance = GetOptionFromContextMenu(options);
             StartCoroutine(WaitForOptionChoiceCo(choiceInstance));
         }
     }
@@ -41,7 +40,7 @@ public class InteractionComponent : MonoBehaviour
     private IEnumerator WaitForOptionChoiceCo(ChoiceContextMenuInstanceState contextMenuInstance)
     {
         yield return new WaitUntil(() => contextMenuInstance.IsChosen);
-        actions[contextMenuInstance.Option].Do();
+        actions[contextMenuInstance.OptionId].Do();
     }
 
     private ContextMenuOptionProperties[] GetOptions()
@@ -49,22 +48,24 @@ public class InteractionComponent : MonoBehaviour
         ContextMenuOptionProperties[] options = new ContextMenuOptionProperties[actions.Length];
         for (int i = 0; i < actions.Length; i++)
             options[i] = actions[i].optionProperties;
+
         return options;
     }
 
-
-    public ChoiceContextMenuInstanceState ChooseOption(ContextMenuOptionProperties[] options)
+    private ChoiceContextMenuInstanceState GetOptionFromContextMenu(ContextMenuOptionProperties[] options)
     {
         ChoiceContextMenuInstanceState choiceInstance = new ChoiceContextMenuInstanceState();
+        UIController.Instance.CreateContextMenu(options, choiceInstance);
 
         return choiceInstance;
     }
 
-
-
-
-
-
+    private void OnValidate()
+    {
+        foreach (var condition in conditions)
+            if (condition.HasTypeChanged())
+                condition.ChangeRequirement();
+    }
 
 
 }

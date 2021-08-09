@@ -10,7 +10,6 @@ public class InteractionController : MonoBehaviour
     private static Dictionary<int, bool> flags = new Dictionary<int, bool>();
     private static Dictionary<int, int> variables = new Dictionary<int, int>();
 
-
     private void Awake()
     {
         Singleton();
@@ -28,7 +27,6 @@ public class InteractionController : MonoBehaviour
     {
         flags[id] = true;
     }    
-
     public void UnsetFlag(int id)
     {
         flags[id] = false;
@@ -37,7 +35,6 @@ public class InteractionController : MonoBehaviour
     {
         flags[id] = !flags[id];
     }
-
 
     public void ChangeVariable(VariableSetting settings)
     {
@@ -57,6 +54,7 @@ public class InteractionController : MonoBehaviour
                 break;
         }
     }
+
     public void Print(object obj)
     {
         Debug.Log(obj);

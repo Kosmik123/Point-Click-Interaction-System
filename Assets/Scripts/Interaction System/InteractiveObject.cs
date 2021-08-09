@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InteractionComponent))]
-public abstract class InteractiveObject : MonoBehaviour
+
+public class InteractiveObject : MonoBehaviour
 {
-    protected InteractionComponent[] components;
+    protected InteractionComponentBase[] components;
 
     private void Awake()
     {
-        components = GetComponents<InteractionComponent>();
+        components = GetComponents<InteractionComponentBase>();
     }
 
     protected void Interact()
@@ -23,5 +23,11 @@ public abstract class InteractiveObject : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        Debug.Log("Clicked");
+        Interact();
     }
 }
