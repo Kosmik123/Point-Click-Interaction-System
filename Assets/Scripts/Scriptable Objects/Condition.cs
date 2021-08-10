@@ -10,18 +10,60 @@ public class Condition
     {
         HasItem,
         UsedItem,
-        ItemAmount
-
+        ItemAmount,
+        FlagState,
+        VariableCompareValue,
+        VariableCompareVariable 
     }
 
     public string name;
     public Type type;
     private Type lastType;
+
     public Requirement properties;
+
+    // conditioned properties
+    public Item item;
+    public int id, value;
+    public bool flagState = true;
+    public VariableSetting.CompareType variableCompareType;
+
+
+    public Condition()
+    {
+        ChangeRequirement();
+    }
+
 
     public bool IsFulfilled()
     {
-        return properties.IsFulfilled();
+        switch (type)
+        {
+            case Type.HasItem:
+                return Inventory.instance.HasItem(item);
+
+            case Type.UsedItem:
+                return Inventory.instance.usedItem == item;
+
+            case Type.ItemAmount:
+                return Inventory.instance.GetItemCount(item) >= value;
+
+            case Type.FlagState:
+                return InteractionController.Instance.GetFlag(id) == flagState;
+
+            case Type.VariableCompareValue:
+                return InteractionController.Instance.CompareVariableWithValue(id, variableCompareType, value);
+
+            case Type.VariableCompareVariable:
+                return InteractionController.Instance.CompareVariables(id, variableCompareType, value);
+        }
+
+
+
+        return false;
+
+
+        //return properties.IsFulfilled();
     }
 
     public bool HasTypeChanged()
@@ -31,18 +73,16 @@ public class Condition
 
     public void ChangeRequirement()
     {
+        return;
         switch (type)
         {
             case Type.HasItem:
                 properties = new HasItemRequirement();
-                name = "Has Item";
                 break;
             case Type.UsedItem:
-                name = "Used Item";
                 properties = new UsedItemRequirement();
                 break;
             case Type.ItemAmount:
-                name = "Item Amount";
                 properties = new ItemAmountRequirement();
                 break;
         }
@@ -57,23 +97,20 @@ public class Condition
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            //base.OnGUI(position, property, label);
-
-            EditorGUI.BeginProperty(position, label, property);
-
             // Precalculate some height values
             float heightHalf = (position.height - 20) * 0.5f;
             float heightOneFourth = (position.height - 20) * 0.25f;
 
+            EditorGUI.BeginProperty(position, label, property);
+
+            // draw property label
             Rect labelRect = new Rect(position.x,
                           position.y + heightOneFourth,
                           position.width,
                           position.height);
-
             position = EditorGUI.PrefixLabel(labelRect,
                                              GUIUtility.GetControlID(FocusType.Passive),
                                              label);
-
             position.y -= heightOneFourth;
 
             int indent = EditorGUI.indentLevel;
@@ -83,35 +120,100 @@ public class Condition
             // type enum display
             Rect enumRect = new Rect(position.x,
                            position.y + heightOneFourth,
-                           100,
+                           position.width / 2 - 4,
                            heightHalf);
             SerializedProperty typeEnum = property.FindPropertyRelative("type");
             EditorGUI.PropertyField(enumRect, typeEnum, GUIContent.none);
 
-            Type conditionType = (Type) typeEnum.enumValueIndex;
+            // getting properties
+            SerializedProperty itemProp = property.FindPropertyRelative("item");
+            SerializedProperty idProp = property.FindPropertyRelative("id");
+            SerializedProperty valueProp = property.FindPropertyRelative("value");
+            SerializedProperty flagStateProp = property.FindPropertyRelative("flagState");
+            SerializedProperty varCompareProp = property.FindPropertyRelative("variableCompareType");
+
+
+            float widthQuarter = position.width / 4 - 5;
+
+
+
+            Type conditionType = (Type)typeEnum.enumValueIndex;
             switch (conditionType)
             {
                 case Type.HasItem:
-                    Rect itemRect = new Rect(position.x,
-                            position.y + heightOneFourth,
-                            100,
-                            heightHalf);
-                    SerializedProperty itemEnum = property.FindPropertyRelative("type");
-                    EditorGUI.PropertyField(enumRect, typeEnum, GUIContent.none);
-
-
-                    break;
                 case Type.UsedItem:
+                case Type.ItemAmount:
+                    Rect itemRect = new Rect(position.x + position.width * 0.5f,
+                               position.y + heightOneFourth,
+                               position.width / 2,
+                               heightHalf);
+
+                    EditorGUI.PropertyField(itemRect, itemProp, GUIContent.none);
+                    if(conditionType == Type.ItemAmount)
+                    {
+                        Rect countRect = new Rect(position.x + position.width/2,
+                                    position.y + heightOneFourth + 18,
+                                    position.width / 2,
+                                    heightHalf);
+                        EditorGUI.PropertyField(countRect, valueProp, GUIContent.none);
+                    }
 
                     break;
-                case Type.ItemAmount:
+                case Type.FlagState:
+                    Rect flagLabelRect = new Rect(position.x,
+                                position.y + heightOneFourth + 18,
+                                widthQuarter,
+                                heightHalf);
+                    Rect flagRect = new Rect(position.x + widthQuarter,
+                                position.y + heightOneFourth + 18,
+                                widthQuarter,
+                                heightHalf);
+                    Rect flagStateLabelRect = new Rect(position.x + 2 * widthQuarter + 5,
+                                position.y + heightOneFourth + 18,
+                                widthQuarter - 5,
+                                heightHalf);
+                    Rect flagStateRect = new Rect(position.x + 3 * widthQuarter,
+                                position.y + heightOneFourth + 18,
+                                widthQuarter,
+                                heightHalf);
+                    EditorGUI.LabelField(flagLabelRect, new GUIContent("Flag"));
+                    EditorGUI.PropertyField(flagRect, idProp, GUIContent.none);
+                    EditorGUI.LabelField(flagStateLabelRect, new GUIContent(" is"));
+                    EditorGUI.PropertyField(flagStateRect, flagStateProp, GUIContent.none);
+                    break;
 
+                case Type.VariableCompareValue:
+                case Type.VariableCompareVariable:
+                    float widthOneFifth = position.width / 5;
+                    Rect variableLabelRect = new Rect(position.x,
+                                position.y + heightOneFourth + 16,
+                                widthOneFifth - 2,
+                                heightHalf);      
+                    Rect variableRect = new Rect(position.x + widthOneFifth,
+                                position.y + heightOneFourth + 16,
+                                widthOneFifth - 2,
+                                heightHalf);   
+                    Rect compareVariableRect = new Rect(position.x + 2 * widthOneFifth,
+                                position.y + heightOneFourth + 16,
+                                widthOneFifth - 2,
+                                position.height);
+                    Rect valueLabelRect = new Rect(position.x + 3 * widthOneFifth,
+                                position.y + heightOneFourth + 16,
+                                widthOneFifth - 2,
+                                heightHalf);
+                    Rect valueRect = new Rect(position.x + 4 * widthOneFifth - 5,
+                                position.y + heightOneFourth + 16,
+                                widthOneFifth - 2,
+                                heightHalf);
+
+                    EditorGUI.LabelField(variableLabelRect, new GUIContent("Variable"));
+                    EditorGUI.PropertyField(variableRect, idProp, GUIContent.none);     
+                    EditorGUI.PropertyField(compareVariableRect, varCompareProp, GUIContent.none);
+                    EditorGUI.LabelField(valueLabelRect, 
+                        new GUIContent(conditionType == Type.VariableCompareValue ? "Value" : "Variable"));
+                    EditorGUI.PropertyField(valueRect, valueProp, GUIContent.none);
                     break;
             }
-
-
-
-
 
 
 

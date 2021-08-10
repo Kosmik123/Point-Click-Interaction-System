@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-
 [CreateAssetMenu]
 public class VariableSetting : ScriptableObject
 {
@@ -10,6 +9,18 @@ public class VariableSetting : ScriptableObject
         Set, Add,
         SetVariable, AddVariable
     }
+
+    public enum CompareType
+    {
+        [InspectorName("<")] Less,
+        [InspectorName(">=")] NotLess,
+        [InspectorName("=")] Equal,
+        [InspectorName("!=")] NotEqual,
+        [InspectorName(">")] Greater,
+        [InspectorName("<=")] NotGreater
+    }
+
+
 
     public int id;
     public Type type;

@@ -225,7 +225,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.83672e-40, z: -1.14e-42, w: 6.2e-44}
+  m_BoundingSphereOverride: {x: 5.430441e-19, y: 5.074744e+31, z: 2.3629492e+32, w: 7.9316175e+34}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -661,10 +661,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditions:
-  - name: Item Amount
-    type: 2
-  - name: Has Item
-    type: 0
+  - name: 
+    type: 1
+    item: {fileID: 0}
+    id: 0
+    value: 0
+    flagState: 0
+    variableCompareType: 3
   actions: []
 --- !u!114 &1593595348
 MonoBehaviour:

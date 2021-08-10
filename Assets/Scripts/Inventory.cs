@@ -7,6 +7,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private ItemSlot[] items;
 
+    public Item usedItem;
+
+
     
     public bool HasItem(Item item)
     {

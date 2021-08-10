@@ -35,6 +35,12 @@ public class InteractionController : MonoBehaviour
     {
         flags[id] = !flags[id];
     }
+    public bool GetFlag(int id)
+    {
+        if(!flags.ContainsKey(id))
+            UnsetFlag(id);
+        return flags[id];
+    }
 
     public void ChangeVariable(VariableSetting settings)
     {
@@ -54,6 +60,57 @@ public class InteractionController : MonoBehaviour
                 break;
         }
     }
+
+    public bool CompareVariableWithValue(int varId, VariableSetting.CompareType compareType, int value)
+    {
+        switch (compareType)
+        {
+            case VariableSetting.CompareType.Less:
+                return variables[varId] < value;
+
+            case VariableSetting.CompareType.NotLess:
+                return variables[varId] >= value;
+
+            case VariableSetting.CompareType.Equal:
+                return variables[varId] == value;
+
+            case VariableSetting.CompareType.NotEqual:
+                return variables[varId] != value;
+
+            case VariableSetting.CompareType.Greater:
+                return variables[varId] > value;
+
+            case VariableSetting.CompareType.NotGreater:
+                return variables[varId] <= value;
+        }
+        return false;
+    }
+
+    public bool CompareVariables(int var1, VariableSetting.CompareType compareType, int var2)
+    {
+        switch (compareType)
+        {
+            case VariableSetting.CompareType.Less:
+                return variables[var1] < variables[var2];
+
+            case VariableSetting.CompareType.NotLess:
+                return variables[var1] >= variables[var2];
+
+            case VariableSetting.CompareType.Equal:
+                return variables[var1] == variables[var2];
+
+            case VariableSetting.CompareType.NotEqual:
+                return variables[var1] != variables[var2];
+
+            case VariableSetting.CompareType.Greater:
+                return variables[var1] > variables[var2];
+
+            case VariableSetting.CompareType.NotGreater:
+                return variables[var1] <= variables[var2];
+        }
+        return false;
+    }
+
 
     public void Print(object obj)
     {
