@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+[CreateAssetMenu()]
+public  class Item : ScriptableObject
 {
     public string name;
     public Sprite icon;
