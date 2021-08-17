@@ -1,60 +1,87 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+
+namespace PointAndClick
 {
-    public static UIController Instance { get { return instance; } }
-    private static UIController instance = null;
 
-    private void Awake()
+    public class UIController : MonoBehaviour
     {
-        Singleton();
-    }
+        public static UIController Instance { get { return instance; } }
+        private static UIController instance = null;
 
-    private void Singleton()
-    {
-        if (instance != null && instance != this)
-            Destroy(gameObject);
-        else
-            instance = this;
-    }
-        
-    public void CreateContextMenu(ContextMenuOptionProperties[] optionsArray, ChoiceContextMenuInstanceState answer)
-    {
-        // Instantiate (ContextMenuPrefab)
-        foreach(var option in optionsArray)
+        [Header("Prefabs")]
+        public GameObject contextMenuPrefab;
+        public GameObject contextMenuButtonPrefab;
+
+        [Header("To Link")]
+        public RectTransform contextMenuContainer;
+
+
+        private void Awake()
         {
-             // Instantiate 1 option button with text = option.message and image = option.icon
+            Singleton();
         }
+
+        private void Singleton()
+        {
+            if (instance != null && instance != this)
+                Destroy(gameObject);
+            else
+                instance = this;
+        }
+
+        public ChoiceContextMenuInstanceState CreateContextMenu(ContextMenuOptionProperties[] optionsArray)
+        {
+            GameObject contextMenuObj = Instantiate(contextMenuPrefab, contextMenuContainer);
+            ContextMenu contextMenu = contextMenuObj.GetComponent<ContextMenu>();
+            ChoiceContextMenuInstanceState answer = new ChoiceContextMenuInstanceState(contextMenu);
+
+            foreach (var option in optionsArray)
+            {
+                GameObject buttonObj = Instantiate(contextMenuButtonPrefab, contextMenuObj.transform);
+                Button button = buttonObj.GetComponent<Button>();
+                button.onClick.AddListener(delegate { answer.setAction(option); });
+            }
+
+            return answer;
+        }
+
+    }
+
+
+
+
+    public class ChoiceContextMenuInstanceState
+    {
+        public bool IsChosen { get; private set; }
+        public ContextMenuOptionProperties Option { get; private set; }
+
+        public ContextMenu contextMenu;
+        public UnityAction<ContextMenuOptionProperties> setAction;
+
+        public ChoiceContextMenuInstanceState(ContextMenu menu)
+        {
+            setAction += Set;
+            IsChosen = false;
+            Option = null;
+            contextMenu = menu;
+        }
+
+        public void Set(ContextMenuOptionProperties opt)
+        {
+            Option = opt;
+            IsChosen = true;
+        }
+
+
+
+
+
+
     }
 
 }
-
-
-
-
-public class ChoiceContextMenuInstanceState
-{
-    public bool IsChosen { get; private set; }
-    public int OptionId { get; private set; }
-
-    public ChoiceContextMenuInstanceState()
-    {
-        IsChosen = false;
-        OptionId = -1;
-    }
-
-    public void Set(int opt)
-    {
-        OptionId = opt;
-        IsChosen = true;
-    }
-
-
-
-
-
-
-}
-

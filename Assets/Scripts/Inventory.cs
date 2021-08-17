@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, PointAndClick.IInventory
 {
-    public static Inventory instance;
-
     [SerializeField]
     private ItemSlot[] items;
 
     public Item usedItem;
 
-
-    
     public bool HasItem(Item item)
     {
-        foreach(ItemSlot slot in items)
+        foreach (ItemSlot slot in items)
         {
             if (slot.item == item)
                 return true;
@@ -21,17 +17,19 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public int GetItemCount(Item item) 
+    public int GetItemCount(Item item)
     {
-        foreach(ItemSlot slot in items)
+        foreach (ItemSlot slot in items)
         {
-            if(slot.item == item)
+            if (slot.item == item)
                 return slot.count;
         }
         return 0;
     }
 
-
-
+    public Item GetUsedItem()
+    {
+        return usedItem;
+    }
 }
 

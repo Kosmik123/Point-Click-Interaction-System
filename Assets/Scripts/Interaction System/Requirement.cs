@@ -1,40 +1,44 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
 
-public abstract class Requirement 
+namespace PointAndClick
 {
-    public abstract bool IsFulfilled();
-}
-
-
-public class HasItemRequirement : Requirement
-{
-    public Item itemInInventory;
-
-    public override bool IsFulfilled()
+    public abstract class Requirement
     {
-        return Inventory.instance.HasItem(itemInInventory);
+        public abstract bool IsFulfilled();
     }
-}
 
-public class UsedItemRequirement : Requirement
-{
-    public Item itemUsed;
 
-    public override bool IsFulfilled()
+    public class HasItemRequirement : Requirement
     {
-        return true;
+        public Item item;
+
+        public override bool IsFulfilled()
+        {
+            return InteractionController.Inventory.HasItem(item);
+        }
     }
-}
 
-
-public class ItemAmountRequirement : Requirement
-{
-    public Item itemInInventory;
-    public int minAmount;
-
-    public override bool IsFulfilled()
+    public class UsedItemRequirement : Requirement
     {
-        return Inventory.instance.GetItemCount(itemInInventory) >= minAmount;
+        public Item itemUsed;
+
+        public override bool IsFulfilled()
+        {
+            return true;
+        }
+    }
+
+
+    public class ItemAmountRequirement : Requirement
+    {
+        public Item itemInInventory;
+        public int minAmount;
+
+        public override bool IsFulfilled()
+        {
+            return InteractionController.Inventory.GetItemCount(itemInInventory) >= minAmount;
+        }
     }
 }

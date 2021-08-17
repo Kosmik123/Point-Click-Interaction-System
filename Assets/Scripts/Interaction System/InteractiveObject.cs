@@ -3,31 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InteractiveObject : MonoBehaviour
+namespace PointAndClick
 {
-    protected InteractionComponentBase[] components;
-
-    private void Awake()
+    public class InteractiveObject : MonoBehaviour
     {
-        components = GetComponents<InteractionComponentBase>();
-    }
+        public bool stackable;
+        protected InteractionBase[] components;
 
-    protected void Interact()
-    {
-        Debug.Log("Interacted");
-        foreach (var component in components)
+        private void Awake()
         {
-            if (component.IsConditionFulfilled())
+            components = GetComponents<InteractionBase>();
+        }
+
+        protected void Interact()
+        {
+            Debug.Log("Interacted");
+            if (stackable)
+                InteractStackable();
+            else
+                InteractNotStackable();
+        }
+
+
+        private void InteractStackable()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void InteractNotStackable()
+        {
+            foreach (var component in components)
             {
-                component.Perform();
-                return;
+                if (component.IsConditionFulfilled())
+                {
+                    component.Perform();
+                    return;
+                }
             }
         }
-    }
 
-    private void OnMouseUpAsButton()
-    {
-        Debug.Log("Clicked");
-        Interact();
+        private void OnMouseUpAsButton()
+        {
+            Debug.Log("Clicked");
+            Interact();
+        }
     }
 }
