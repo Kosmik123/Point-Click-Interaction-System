@@ -14,7 +14,8 @@ namespace PointAndClick
             ItemAmount,
             FlagState,
             VariableCompareValue,
-            VariableCompareVariable
+            VariableCompareVariable,
+            SavedCondition
         }
 
         public string name;
@@ -28,8 +29,7 @@ namespace PointAndClick
         public int id, value;
         public bool flagState = true;
         public VariableSetting.CompareType variableCompareType;
-
-        public HasItemRequirement hasItemRequirement;
+        public ConditionSO savedCondition;
 
         public Condition()
         {
@@ -39,7 +39,6 @@ namespace PointAndClick
 
         public bool IsFulfilled()
         {
-
             switch (type)
             {
                 case Type.HasItem:
@@ -59,6 +58,10 @@ namespace PointAndClick
 
                 case Type.VariableCompareVariable:
                     return InteractionController.Instance.CompareVariables(id, variableCompareType, value);
+
+                case Type.SavedCondition:
+                    return (savedCondition != null && savedCondition.IsFullfilled());
+
             }
 
 
@@ -135,9 +138,7 @@ namespace PointAndClick
                 SerializedProperty valueProp = property.FindPropertyRelative("value");
                 SerializedProperty flagStateProp = property.FindPropertyRelative("flagState");
                 SerializedProperty varCompareProp = property.FindPropertyRelative("variableCompareType");
-                SerializedProperty hasItemProp = 
-                    property.FindPropertyRelative("hasItemRequirement").FindPropertyRelative("item");
-
+                SerializedProperty savedConditionProp = property.FindPropertyRelative("savedCondition");
 
                 float widthQuarter = position.width / 4 - 5;
 
@@ -218,6 +219,13 @@ namespace PointAndClick
                         EditorGUI.LabelField(valueLabelRect,
                             new GUIContent(conditionType == Type.VariableCompareValue ? "Value" : "Variable"));
                         EditorGUI.PropertyField(valueRect, valueProp, GUIContent.none);
+                        break;
+                    case Type.SavedCondition:
+                        Rect savedConditionRect = new Rect(position.x ,
+                                    position.y + heightOneFourth + 18,
+                                    position.width,
+                                    heightHalf);
+                        EditorGUI.PropertyField(savedConditionRect, savedConditionProp, GUIContent.none);
                         break;
                 }
 

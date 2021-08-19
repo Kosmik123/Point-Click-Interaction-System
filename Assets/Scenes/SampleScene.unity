@@ -809,12 +809,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditions:
   - name: 
-    type: 3
+    type: 6
     item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
     id: 3
     value: 75
     flagState: 0
     variableCompareType: 1
+    savedCondition: {fileID: 0}
   actions: []
 --- !u!114 &1593595348
 MonoBehaviour:
@@ -828,6 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b3647dcdb2ae841af4c1523b88ddf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stackable: 0
 --- !u!95 &1593595350
 Animator:
   serializedVersion: 3
