@@ -29,26 +29,26 @@ namespace PointAndClick
                 Instance = this;
         }
 
-        public void SetFlag(int id)
+        public static void SetFlag(int id)
         {
             flags[id] = true;
         }
-        public void UnsetFlag(int id)
+        public static void UnsetFlag(int id)
         {
             flags[id] = false;
         }
-        public void ToggleFlag(int id)
+        public static void ToggleFlag(int id)
         {
             flags[id] = !flags[id];
         }
-        public bool GetFlag(int id)
+        public static bool GetFlag(int id)
         {
             if (!flags.ContainsKey(id))
                 UnsetFlag(id);
             return flags[id];
         }
 
-        public void ChangeVariable(VariableSetting settings)
+        public static void ChangeVariable(VariableSetting settings)
         {
             switch (settings.type)
             {
@@ -67,7 +67,7 @@ namespace PointAndClick
             }
         }
 
-        public bool CompareVariableWithValue(int varId, VariableSetting.CompareType compareType, int value)
+        public static bool CompareVariableWithValue(int varId, VariableSetting.CompareType compareType, int value)
         {
             switch (compareType)
             {
@@ -92,7 +92,7 @@ namespace PointAndClick
             return false;
         }
 
-        public bool CompareVariables(int var1, VariableSetting.CompareType compareType, int var2)
+        public static bool CompareVariables(int var1, VariableSetting.CompareType compareType, int var2)
         {
             switch (compareType)
             {

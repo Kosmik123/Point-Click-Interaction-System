@@ -29,7 +29,7 @@ namespace PointAndClick
         public int id, value;
         public bool flagState = true;
         public VariableSetting.CompareType variableCompareType;
-        public ConditionSO savedCondition;
+        public Requirement savedCondition;
 
         public Condition()
         {
@@ -51,16 +51,16 @@ namespace PointAndClick
                     return InteractionController.Inventory.GetItemCount(item) >= value;
 
                 case Type.FlagState:
-                    return InteractionController.Instance.GetFlag(id) == flagState;
+                    return InteractionController.GetFlag(id) == flagState;
 
                 case Type.VariableCompareValue:
-                    return InteractionController.Instance.CompareVariableWithValue(id, variableCompareType, value);
+                    return InteractionController.CompareVariableWithValue(id, variableCompareType, value);
 
                 case Type.VariableCompareVariable:
-                    return InteractionController.Instance.CompareVariables(id, variableCompareType, value);
+                    return InteractionController.CompareVariables(id, variableCompareType, value);
 
                 case Type.SavedCondition:
-                    return (savedCondition != null && savedCondition.IsFullfilled());
+                    return (savedCondition != null && savedCondition.IsFulfilled());
 
             }
 

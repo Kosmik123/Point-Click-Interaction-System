@@ -810,12 +810,13 @@ MonoBehaviour:
   conditions:
   - name: 
     type: 6
+    properties: {fileID: 0}
     item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
     id: 3
     value: 75
     flagState: 0
     variableCompareType: 1
-    savedCondition: {fileID: 0}
+    savedCondition: {fileID: 11400000, guid: dd2148f878f77234fae4498112ef890f, type: 2}
   actions: []
 --- !u!114 &1593595348
 MonoBehaviour:
