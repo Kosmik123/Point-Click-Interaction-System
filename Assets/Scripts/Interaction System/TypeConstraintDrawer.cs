@@ -1,27 +1,15 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-
-
 /*
+https://answers.unity.com/questions/1479756/
 
-
-public class StoreInterfaceReference : MonoBehaviour, MyInterface
-{
-    [TypeConstraint(typeof(MyInterface))]
-    public GameObject myReference;
-
-    public void Do()
-    {
-    }
-}
-
-public interface MyInterface
-{
-    void Do();
-}
-
+     +============================+
+     |    Script by Xarbrough     |
+     |  Mar 13, 2018 at 12:44 PM  |
+     +============================+
 */
+
 namespace PointAndClick
 {
     public class TypeConstraintAttribute : PropertyAttribute
@@ -38,6 +26,25 @@ namespace PointAndClick
     [CustomPropertyDrawer(typeof(TypeConstraintAttribute))]
     public class TypeConstraintDrawer : PropertyDrawer
     {
+        private bool IsObjectOfType(object refObject, System.Type type)
+        {
+            if (refObject is GameObject)
+            {
+                GameObject draggedGameObject = refObject as GameObject;
+                if (draggedGameObject.GetComponent(type) == null)
+                {
+                    return false;
+                }
+            }
+            else if ((refObject is IInventory) == false)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType != SerializedPropertyType.ObjectReference)
@@ -49,24 +56,16 @@ namespace PointAndClick
 
             var constraint = attribute as TypeConstraintAttribute;
 
+
+
+
             if (DragAndDrop.objectReferences.Length > 0)
             {
                 var draggedObject = DragAndDrop.objectReferences[0];
-
-                if (draggedObject is GameObject)
-                {
-                    GameObject draggedGameObject = draggedObject as GameObject;
-                    if (draggedGameObject.GetComponent( constraint.Type ) == null)
-                    {
-                        DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
-                    }
-                }
-                else if ((draggedObject is IInventory) == false)
-                {
+                if (IsObjectOfType(draggedObject, constraint.Type) == false)
                     DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
-                }
 
-                
+
             }
 
             AssignProperty(position, property, label, constraint);
@@ -74,7 +73,7 @@ namespace PointAndClick
         }
 
 
-        private static void AssignProperty(Rect position, SerializedProperty property, GUIContent label, TypeConstraintAttribute constraint)
+        private void AssignProperty(Rect position, SerializedProperty property, GUIContent label, TypeConstraintAttribute constraint)
         {
             /*
             // If a value was set through other means (e.g. ObjectPicker)
@@ -89,7 +88,13 @@ namespace PointAndClick
             }            
             */
 
-            property.objectReferenceValue = EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(Object), true);
+            //EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(Object), true);
+
+
+            property.objectReferenceValue = EditorGUI.ObjectField(
+                position, label, property.objectReferenceValue, typeof(Object), true);
+            if (IsObjectOfType(property.objectReferenceValue, constraint.Type) == false)
+                property.objectReferenceValue = null;
 
         }
     }

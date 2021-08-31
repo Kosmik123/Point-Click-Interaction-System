@@ -307,6 +307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701913040}
+  - component: {fileID: 701913041}
   m_Layer: 0
   m_Name: Door Holder
   m_TagString: Untagged
@@ -329,6 +330,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 47, z: 0}
+--- !u!114 &701913041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701913039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c57185259168c4a928027d268e27e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  usedItem: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0acf29427b35b44f88bea03cc250bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: c90496372a8e1d547ae15ff65a2ba612, type: 2}
+  inventory: {fileID: 701913039}
 --- !u!4 &1256770931
 Transform:
   m_ObjectHideFlags: 0
