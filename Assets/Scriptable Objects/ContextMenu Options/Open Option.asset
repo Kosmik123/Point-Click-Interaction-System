@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e87b2bcf5a92c5d4b9a023fbd27d9383, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d46aca8d9a7647488e7cda9d9a5bd97, type: 3}
   m_Name: Open Option
   m_EditorClassIdentifier: 
-  message: Open
+  title: Open
   icon: {fileID: -1290855366162983238, guid: 8a1fafc7f88dd084b980aa90301f8bf8, type: 3}

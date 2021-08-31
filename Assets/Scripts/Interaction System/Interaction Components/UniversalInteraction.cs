@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace PointAndClick
 {
     // system using inventory, variables and flags as conditions
     [RequireComponent(typeof(InteractiveObject))]
-    public class UniversalInteraction : InteractionBase
+    public sealed class UniversalInteraction : InteractionBase
     {
         public Condition[] conditions;
         public InteractionOption[] actions;
+        private bool isBusy;
 
         public override bool IsConditionFulfilled()
         {
@@ -24,8 +24,11 @@ namespace PointAndClick
 
         public override void Perform()
         {
+            if (isBusy)
+                return;
+
             if (actions.Length < 1)
-                throw (new System.Exception("Error: No action assigned!"));
+                NoActionException();
 
             if (actions.Length == 1)
             {
@@ -33,8 +36,9 @@ namespace PointAndClick
             }
             else
             {
-                ContextMenuOptionProperties[] options = GetOptions();
+                OptionProperties[] options = GetOptions();
                 ChoiceContextMenuInstanceState choiceInstance = GetNewContextMenuState(options);
+                isBusy = true;
                 StartCoroutine(WaitForOptionChoiceCo(choiceInstance));
             }
         }
@@ -45,24 +49,25 @@ namespace PointAndClick
 
             foreach(var action in actions)
             { 
-                if (action.optionProperties == contextMenuInstance.Option)
+                if (action.contextMenuProperties == contextMenuInstance.Option)
                 {
                     action.Do();
+                    isBusy = false;
                     break; 
                 }
             } 
         }
 
-        private ContextMenuOptionProperties[] GetOptions()
+        private OptionProperties[] GetOptions()
         {
-            ContextMenuOptionProperties[] options = new ContextMenuOptionProperties[actions.Length];
+            OptionProperties[] options = new OptionProperties[actions.Length];
             for (int i = 0; i < actions.Length; i++)
-                options[i] = actions[i].optionProperties;
+                options[i] = actions[i].contextMenuProperties;
 
             return options;
         }
 
-        private ChoiceContextMenuInstanceState GetNewContextMenuState(ContextMenuOptionProperties[] options)
+        private ChoiceContextMenuInstanceState GetNewContextMenuState(OptionProperties[] options)
         {
             ChoiceContextMenuInstanceState choiceInstance =
                 UIController.Instance.CreateContextMenu(options);
@@ -76,7 +81,5 @@ namespace PointAndClick
                 if (condition.HasTypeChanged())
                     condition.ChangeRequirement();
         }
-
-
     }
 }

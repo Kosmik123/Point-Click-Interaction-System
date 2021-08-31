@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace PointAndClick
 {
     public class InteractionController : MonoBehaviour
     {
         public static InteractionController Instance { get; private set; } = null;
-        public static IInventory Inventory { get { return Instance.inventory; } }
+        public static IInventory Inventory
+        {
+            get
+            {
+                GameObject invGO = Instance.inventory as GameObject;
+                if (invGO != null)
+                    return invGO.GetComponent<IInventory>();
+
+                return Instance.inventory as IInventory;
+            }
+        }
 
         private static Dictionary<int, bool> flags = new Dictionary<int, bool>();
         private static Dictionary<int, int> variables = new Dictionary<int, int>();
 
-        [SerializeField]
-        private IInventory inventory;
-
+        [TypeConstraint(typeof(IInventory))]
+        public Object inventory;
 
         private void Awake()
         {
@@ -29,26 +39,26 @@ namespace PointAndClick
                 Instance = this;
         }
 
-        public static void SetFlag(int id)
+        public void SetFlag(int id)
         {
             flags[id] = true;
         }
-        public static void UnsetFlag(int id)
+        public void UnsetFlag(int id)
         {
             flags[id] = false;
         }
-        public static void ToggleFlag(int id)
+        public void ToggleFlag(int id)
         {
             flags[id] = !flags[id];
         }
-        public static bool GetFlag(int id)
+        public bool GetFlag(int id)
         {
             if (!flags.ContainsKey(id))
                 UnsetFlag(id);
             return flags[id];
         }
 
-        public static void ChangeVariable(VariableSetting settings)
+        public void ChangeVariable(VariableSetting settings)
         {
             switch (settings.type)
             {
@@ -67,7 +77,8 @@ namespace PointAndClick
             }
         }
 
-        public static bool CompareVariableWithValue(int varId, VariableSetting.CompareType compareType, int value)
+        public bool CompareVariableWithValue(int varId, 
+            VariableSetting.CompareType compareType, int value)
         {
             switch (compareType)
             {
@@ -92,7 +103,8 @@ namespace PointAndClick
             return false;
         }
 
-        public static bool CompareVariables(int var1, VariableSetting.CompareType compareType, int var2)
+        public bool CompareVariables(int var1, 
+            VariableSetting.CompareType compareType, int var2)
         {
             switch (compareType)
             {
@@ -117,11 +129,24 @@ namespace PointAndClick
             return false;
         }
 
-
         public void Print(object obj)
         {
             Debug.Log(obj);
         }
+
+        [UnityEditor.CustomEditor(typeof(InteractionController))]
+        public class Editor : UnityEditor.Editor
+        {
+
+        }
+
+
+
+
+
+
+
+
 
 
 

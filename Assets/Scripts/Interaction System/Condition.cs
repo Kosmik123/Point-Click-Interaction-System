@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-
 namespace PointAndClick
 { 
     [System.Serializable]
@@ -36,7 +35,6 @@ namespace PointAndClick
             ChangeRequirement();
         }
 
-
         public bool IsFulfilled()
         {
             switch (type)
@@ -51,24 +49,19 @@ namespace PointAndClick
                     return InteractionController.Inventory.GetItemCount(item) >= value;
 
                 case Type.FlagState:
-                    return InteractionController.GetFlag(id) == flagState;
+                    return InteractionController.Instance.GetFlag(id) == flagState;
 
                 case Type.VariableCompareValue:
-                    return InteractionController.CompareVariableWithValue(id, variableCompareType, value);
+                    return InteractionController.Instance.CompareVariableWithValue(id, variableCompareType, value);
 
                 case Type.VariableCompareVariable:
-                    return InteractionController.CompareVariables(id, variableCompareType, value);
+                    return InteractionController.Instance.CompareVariables(id, variableCompareType, value);
 
                 case Type.SavedCondition:
                     return (savedCondition != null && savedCondition.IsFulfilled());
 
             }
-
-
-
             return false;
-
-
             //return properties.IsFulfilled();
         }
 
@@ -95,7 +88,6 @@ namespace PointAndClick
             lastType = type;
             Debug.Log("Changing requirement to " + properties);
         }
-
 
 #if UNITY_EDITOR
         [CustomPropertyDrawer(typeof(Condition))]
@@ -141,8 +133,6 @@ namespace PointAndClick
                 SerializedProperty savedConditionProp = property.FindPropertyRelative("savedCondition");
 
                 float widthQuarter = position.width / 4 - 5;
-
-
 
                 Type conditionType = (Type)typeEnum.enumValueIndex;
                 switch (conditionType)
@@ -239,14 +229,6 @@ namespace PointAndClick
             }
 
         }
-
 #endif
-
-
     }
-
-
-
-
-
 }

@@ -1,12 +1,10 @@
-﻿
-
-
-namespace PointAndClick
+﻿namespace PointAndClick
 {
     // only needs specific items in inventory to fulfill the condition
-    public abstract class SimpleInteraction : InteractionBase
+    public class SimpleInteraction : InteractionBase
     {
         public ItemSlot[] neededItems;
+        public InteractionOption[] actions;
 
         public override bool IsConditionFulfilled()
         {
@@ -17,6 +15,20 @@ namespace PointAndClick
             }
             return true;
         }
-    }
 
+        public override void Perform()
+        {
+            if (actions.Length < 1)
+                NoActionException();
+
+            if (actions.Length == 1)
+            {
+                actions[0].Do();
+            }
+            else
+            {
+
+            }
+        }
+    }
 }

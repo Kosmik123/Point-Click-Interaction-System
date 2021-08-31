@@ -6,8 +6,4 @@
         int GetItemCount(Item item);
         Item GetUsedItem();
     }
-
-
-
 }
-

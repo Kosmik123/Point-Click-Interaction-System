@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace PointAndClick
-{
+{ 
     public class InteractiveObject : MonoBehaviour
     {
         public bool stackable;
@@ -15,15 +14,13 @@ namespace PointAndClick
             components = GetComponents<InteractionBase>();
         }
 
-        protected void Interact()
+        public void Interact()
         {
-            Debug.Log("Interacted");
             if (stackable)
                 InteractStackable();
             else
                 InteractNotStackable();
         }
-
 
         private void InteractStackable()
         {
@@ -32,8 +29,9 @@ namespace PointAndClick
 
         private void InteractNotStackable()
         {
-            foreach (var component in components)
+            for(int i = components.Length-1; i >=0; i--)
             {
+                var component = components[i];
                 if (component.IsConditionFulfilled())
                 {
                     component.Perform();
@@ -41,7 +39,7 @@ namespace PointAndClick
                 }
             }
         }
-
+        
         private void OnMouseUpAsButton()
         {
             Debug.Log("Clicked");
