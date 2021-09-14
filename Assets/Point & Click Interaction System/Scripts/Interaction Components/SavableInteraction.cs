@@ -4,9 +4,11 @@ namespace PointAndClick
 {
     public class SavableInteraction : InteractionBase
     {
+
+
         public class InteractionSO : ScriptableObject
         {
-            
+
         }
 
         public override bool IsConditionFulfilled()
@@ -14,9 +16,11 @@ namespace PointAndClick
             throw new System.NotImplementedException();
         }
 
-        public override void Perform()
+
+        public override InteractionOption[] GetActions()
         {
-            throw new System.NotImplementedException();
+            InteractionOption[] actions = new InteractionOption[0];
+            return actions;
         }
     }
 }

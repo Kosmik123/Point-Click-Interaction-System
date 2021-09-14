@@ -6,6 +6,11 @@
         public ItemSlot[] neededItems;
         public InteractionOption[] actions;
 
+        public override InteractionOption[] GetActions()
+        {
+            return actions;
+        }
+
         public override bool IsConditionFulfilled()
         {
             foreach (var condition in neededItems)
@@ -16,19 +21,5 @@
             return true;
         }
 
-        public override void Perform()
-        {
-            if (actions.Length < 1)
-                NoActionException();
-
-            if (actions.Length == 1)
-            {
-                actions[0].Do();
-            }
-            else
-            {
-
-            }
-        }
     }
 }

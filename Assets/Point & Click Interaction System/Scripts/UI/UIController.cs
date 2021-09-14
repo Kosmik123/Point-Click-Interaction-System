@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace PointAndClick
@@ -40,33 +39,10 @@ namespace PointAndClick
             {
                 GameObject buttonObj = Instantiate(contextMenuButtonPrefab, contextMenuObj.transform);
                 Button button = buttonObj.GetComponent<Button>();
-                button.onClick.AddListener(delegate { answer.setAction(option); });
+                button.onClick.AddListener(delegate { answer.SetAction(option); });
             }
 
             return answer;
-        }
-    }
-
-    public class ChoiceContextMenuInstanceState
-    {
-        public bool IsChosen { get; private set; }
-        public OptionProperties Option { get; private set; }
-
-        public ContextMenu contextMenu;
-        public UnityAction<OptionProperties> setAction;
-
-        public ChoiceContextMenuInstanceState(ContextMenu menu)
-        {
-            setAction += Set;
-            IsChosen = false;
-            Option = null;
-            contextMenu = menu;
-        }
-
-        public void Set(OptionProperties opt)
-        {
-            Option = opt;
-            IsChosen = true;
         }
     }
 }

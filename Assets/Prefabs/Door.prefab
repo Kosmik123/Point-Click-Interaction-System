@@ -195,6 +195,11 @@ GameObject:
   - component: {fileID: 6533400871490093494}
   - component: {fileID: 6533400871490093492}
   - component: {fileID: 6533400871490093495}
+  - component: {fileID: 778339394051325618}
+  - component: {fileID: 8326339506806378480}
+  - component: {fileID: 6311231216347100584}
+  - component: {fileID: 4783328615170591443}
+  - component: {fileID: 7477910897854662291}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -250,6 +255,179 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 2.2, z: 0.3}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &778339394051325618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533400871490093481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b3647dcdb2ae841af4c1523b88ddf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stackable: 0
+--- !u!114 &8326339506806378480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533400871490093481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  actions:
+  - contextMenuProperties: {fileID: 0}
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: Print
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Do otwarcia drzwi potrzebujesz klucza.
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &6311231216347100584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533400871490093481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - name: 
+    type: 0
+    properties: {fileID: 0}
+    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
+    id: 0
+    value: 0
+    flagState: 0
+    variableCompareType: 0
+    savedCondition: {fileID: 0}
+    animatorToCompare: {fileID: 0}
+    animatorStateName: 
+  - name: 
+    type: 7
+    properties: {fileID: 0}
+    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
+    id: 0
+    value: 0
+    flagState: 0
+    variableCompareType: 0
+    savedCondition: {fileID: 0}
+    animatorToCompare: {fileID: 6533400871490093492}
+    animatorStateName: Locked
+  actions:
+  - contextMenuProperties: {fileID: 0}
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6533400871490093492}
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Open
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &4783328615170591443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533400871490093481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - name: 
+    type: 7
+    properties: {fileID: 0}
+    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
+    id: 0
+    value: 0
+    flagState: 0
+    variableCompareType: 0
+    savedCondition: {fileID: 0}
+    animatorToCompare: {fileID: 6533400871490093492}
+    animatorStateName: Opened
+  actions:
+  - contextMenuProperties: {fileID: 0}
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6533400871490093492}
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Close
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &7477910897854662291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533400871490093481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - name: 
+    type: 7
+    properties: {fileID: 0}
+    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
+    id: 0
+    value: 0
+    flagState: 0
+    variableCompareType: 0
+    savedCondition: {fileID: 0}
+    animatorToCompare: {fileID: 6533400871490093492}
+    animatorStateName: Closed
+  actions:
+  - contextMenuProperties: {fileID: 0}
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6533400871490093492}
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Open
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6533400871547733645
 GameObject:
   m_ObjectHideFlags: 0

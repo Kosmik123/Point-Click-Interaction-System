@@ -12,15 +12,6 @@ https://answers.unity.com/questions/1479756/
 
 namespace PointAndClick
 {
-    public class TypeConstraintAttribute : PropertyAttribute
-    {
-        public System.Type Type { get; }
-
-        public TypeConstraintAttribute(System.Type type)
-        {
-            Type = type;
-        }
-    }
 
 
     [CustomPropertyDrawer(typeof(TypeConstraintAttribute))]
