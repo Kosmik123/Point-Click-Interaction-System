@@ -39,6 +39,8 @@ namespace PointAndClick
             {
                 GameObject buttonObj = Instantiate(contextMenuButtonPrefab, contextMenuObj.transform);
                 Button button = buttonObj.GetComponent<Button>();
+                button.GetComponentInChildren<Text>().text = option.title;
+                button.GetComponentsInChildren<Image>()[1].sprite = option.icon;
                 button.onClick.AddListener(delegate { answer.SetAction(option); });
             }
 

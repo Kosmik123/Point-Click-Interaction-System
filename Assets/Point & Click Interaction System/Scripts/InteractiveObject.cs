@@ -75,6 +75,7 @@ namespace PointAndClick
             {
                 if (action.contextMenuProperties == contextMenuInstance.Option)
                 {
+                    Destroy(contextMenuInstance.contextMenu.gameObject);
                     action.Do();
                     isBusy = false;
                     break;

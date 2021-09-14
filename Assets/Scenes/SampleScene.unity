@@ -238,151 +238,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &701913039 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6533400871490093481, guid: a799351926725714ea3d5a7f87c273f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6533400870840915558}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &701913040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6533400871490093494, guid: a799351926725714ea3d5a7f87c273f7,
     type: 3}
   m_PrefabInstance: {fileID: 6533400870840915558}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &701913041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701913039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conditions:
-  - name: 
-    type: 7
-    properties: {fileID: 0}
-    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
-    id: 0
-    value: 0
-    flagState: 0
-    variableCompareType: 0
-    savedCondition: {fileID: 0}
-    animatorToCompare: {fileID: 6533400870840915559}
-    animatorStateName: Closed
-  - name: 
-    type: 1
-    properties: {fileID: 0}
-    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
-    id: 0
-    value: 0
-    flagState: 0
-    variableCompareType: 0
-    savedCondition: {fileID: 0}
-    animatorToCompare: {fileID: 6533400870840915559}
-    animatorStateName: Closed
-  actions:
-  - contextMenuProperties: {fileID: 0}
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6533400870840915559}
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Open
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &701913042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701913039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conditions:
-  - name: 
-    type: 0
-    properties: {fileID: 0}
-    item: {fileID: 11400000, guid: 0036a4e02b5e4e940a74715f38e05fb5, type: 2}
-    id: 0
-    value: 0
-    flagState: 0
-    variableCompareType: 0
-    savedCondition: {fileID: 0}
-    animatorToCompare: {fileID: 0}
-    animatorStateName: 
-  actions:
-  - contextMenuProperties: {fileID: 0}
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1256770930}
-          m_MethodName: Print
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: "Masz klucz. U\u017Cyj go by otworzy\u0107 drzwi."
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &701913043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701913039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8f1a9ad79dbe842b0c7c630be8096d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conditions: []
-  actions:
-  - contextMenuProperties: {fileID: 0}
-    action:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1256770930}
-          m_MethodName: Print
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Do otwarcia drzwi potrzebujesz klucza.
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &701913044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701913039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13b3647dcdb2ae841af4c1523b88ddf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stackable: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1125,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 553344352}
     m_Modifications:
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1256770930}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326339506806378480, guid: a799351926725714ea3d5a7f87c273f7,
+        type: 3}
+      propertyPath: actions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6533400871490093481, guid: a799351926725714ea3d5a7f87c273f7,
         type: 3}
       propertyPath: m_Name
@@ -1287,7 +1183,7 @@ PrefabInstance:
     - target: {fileID: 6533400871490093494, guid: a799351926725714ea3d5a7f87c273f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6533400871490093494, guid: a799351926725714ea3d5a7f87c273f7,
         type: 3}
@@ -1331,9 +1227,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a799351926725714ea3d5a7f87c273f7, type: 3}
---- !u!95 &6533400870840915559 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6533400871490093492, guid: a799351926725714ea3d5a7f87c273f7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6533400870840915558}
-  m_PrefabAsset: {fileID: 0}

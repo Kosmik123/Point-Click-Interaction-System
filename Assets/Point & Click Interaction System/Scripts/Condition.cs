@@ -8,7 +8,7 @@ namespace PointAndClick
     {
         public enum Type
         {
-            HasItem,
+            ItemInInventory,
             UsedItem,
             ItemAmount,
             FlagState,
@@ -43,7 +43,7 @@ namespace PointAndClick
         {
             switch (type)
             {
-                case Type.HasItem:
+                case Type.ItemInInventory:
                     return InteractionController.Inventory.HasItem(item);
 
                 case Type.UsedItem:
@@ -82,7 +82,7 @@ namespace PointAndClick
             return;
             switch (type)
             {
-                case Type.HasItem:
+                case Type.ItemInInventory:
                     properties = new HasItemRequirement();
                     break;
                 case Type.UsedItem:
@@ -155,7 +155,7 @@ namespace PointAndClick
                 Type conditionType = (Type)typeEnum.enumValueIndex;
                 switch (conditionType)
                 {
-                    case Type.HasItem:
+                    case Type.ItemInInventory:
                     case Type.UsedItem:
                     case Type.ItemAmount:
                         Rect itemRect = new Rect(position.x + position.width * 0.5f,
