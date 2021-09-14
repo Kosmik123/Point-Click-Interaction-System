@@ -8,8 +8,8 @@ namespace PointAndClick
     [RequireComponent(typeof(InteractiveObject))]
     public sealed class UniversalInteraction : InteractionBase
     {
-        public Condition[] conditions;
-        public InteractionOption[] actions;
+        public Condition[] conditions = new Condition[0];
+        public InteractionOption[] actions = new InteractionOption[0];
         private bool isBusy;
 
         public override bool IsConditionFulfilled()

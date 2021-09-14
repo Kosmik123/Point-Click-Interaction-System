@@ -14,7 +14,8 @@ namespace PointAndClick
             FlagState,
             VariableCompareValue,
             VariableCompareVariable,
-            SavedCondition
+            SavedCondition,
+            AnimatorState
         }
 
         public string name;
@@ -29,6 +30,9 @@ namespace PointAndClick
         public bool flagState = true;
         public VariableSetting.CompareType variableCompareType;
         public Requirement savedCondition;
+        public Animator animatorToCompare;
+        public string animatorStateName;
+
 
         public Condition()
         {
@@ -59,6 +63,9 @@ namespace PointAndClick
 
                 case Type.SavedCondition:
                     return (savedCondition != null && savedCondition.IsFulfilled());
+
+                case Type.AnimatorState:
+                    return animatorToCompare.GetCurrentAnimatorStateInfo(0).IsName(animatorStateName);
 
             }
             return false;
@@ -95,7 +102,6 @@ namespace PointAndClick
         {
             public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
-
                 // Precalculate some height values
                 float heightHalf = (position.height - 20) * 0.5f;
                 float heightOneFourth = (position.height - 20) * 0.25f;
@@ -124,6 +130,15 @@ namespace PointAndClick
                 SerializedProperty typeEnum = property.FindPropertyRelative("type");
                 EditorGUI.PropertyField(enumRect, typeEnum, GUIContent.none);
 
+                // other rects
+
+
+
+
+
+
+
+
                 // getting properties
                 SerializedProperty itemProp = property.FindPropertyRelative("item");
                 SerializedProperty idProp = property.FindPropertyRelative("id");
@@ -131,6 +146,9 @@ namespace PointAndClick
                 SerializedProperty flagStateProp = property.FindPropertyRelative("flagState");
                 SerializedProperty varCompareProp = property.FindPropertyRelative("variableCompareType");
                 SerializedProperty savedConditionProp = property.FindPropertyRelative("savedCondition");
+                SerializedProperty animatorRefProp = property.FindPropertyRelative("animatorToCompare");
+                SerializedProperty stateNameProp = property.FindPropertyRelative("animatorStateName");
+
 
                 float widthQuarter = position.width / 4 - 5;
 
@@ -216,6 +234,19 @@ namespace PointAndClick
                                     position.width,
                                     heightHalf);
                         EditorGUI.PropertyField(savedConditionRect, savedConditionProp, GUIContent.none);
+                        break;
+
+                    case Type.AnimatorState:
+                        Rect animatorRefRect = new Rect(position.x,
+                                    position.y + heightOneFourth + 18,
+                                    2 * widthQuarter,
+                                    heightHalf);
+                        Rect animatorStateNameRect = new Rect(position.x + position.width / 2,
+                                    position.y + heightOneFourth + 18,
+                                    position.width / 2,
+                                    heightHalf);
+                        EditorGUI.PropertyField(animatorRefRect, animatorRefProp, GUIContent.none);
+                        EditorGUI.PropertyField(animatorStateNameRect, stateNameProp, GUIContent.none);
                         break;
                 }
 

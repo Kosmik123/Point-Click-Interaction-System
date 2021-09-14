@@ -129,10 +129,13 @@ namespace PointAndClick
             return false;
         }
 
-        public void Print(object obj)
+
+        public void Print(string message)
         {
-            Debug.Log(obj);
+            Debug.Log(message);
         }
+
+
 
         [UnityEditor.CustomEditor(typeof(InteractionController))]
         public class Editor : UnityEditor.Editor

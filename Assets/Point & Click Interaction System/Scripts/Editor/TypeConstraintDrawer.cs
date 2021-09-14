@@ -95,7 +95,6 @@ namespace PointAndClick
                 position, label, property.objectReferenceValue, typeof(Object), true);
             if (IsObjectOfType(property.objectReferenceValue, constraint.Type) == false)
                 property.objectReferenceValue = null;
-
         }
     }
 }
