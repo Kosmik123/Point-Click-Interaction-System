@@ -27,7 +27,15 @@ namespace PointAndClick
 
         private void InteractStackable()
         {
-            throw new System.NotImplementedException();
+            List<InteractionOption> actions = new List<InteractionOption>();
+            for (int i = components.Length - 1; i >= 0; i--)
+            {
+                var component = components[i];
+                if (component.IsConditionFulfilled())
+                    actions.AddRange(component.GetActions());
+            }
+
+            Perform(actions.ToArray());
         }
 
         private void InteractNotStackable()
@@ -82,7 +90,6 @@ namespace PointAndClick
                 }
             }
         }
-
 
         private OptionProperties[] GetOptions(InteractionOption[] actions)
         {
